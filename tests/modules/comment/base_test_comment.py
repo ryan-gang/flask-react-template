@@ -95,32 +95,28 @@ class BaseTestComment(unittest.TestCase):
     def create_test_comment(self, account_id: str, task_id: str, content: str = None) -> Comment:
         return CommentService.create_comment(
             params=CreateCommentParams(
-                account_id=account_id,
-                task_id=task_id,
-                content=content or self.DEFAULT_COMMENT_CONTENT,
+                account_id=account_id, task_id=task_id, content=content or self.DEFAULT_COMMENT_CONTENT
             )
         )
 
     def create_multiple_test_comments(self, account_id: str, task_id: str, count: int) -> list[Comment]:
         comments: list[Comment] = []
         for i in range(count):
-            comment = self.create_test_comment(
-                account_id=account_id, task_id=task_id, content=f"Comment {i+1}"
-            )
+            comment = self.create_test_comment(account_id=account_id, task_id=task_id, content=f"Comment {i+1}")
             comments.append(comment)
         return comments
 
     # HTTP REQUEST HELPER METHODS
 
     def make_authenticated_request(
-        self, 
-        method: str, 
-        account_id: str, 
+        self,
+        method: str,
+        account_id: str,
         task_id: str,
-        token: str, 
-        comment_id: str = None, 
-        data: dict = None, 
-        query_params: str = ""
+        token: str,
+        comment_id: str = None,
+        data: dict = None,
+        query_params: str = "",
     ):
         if comment_id:
             url = self.get_comment_by_id_api_url(account_id, task_id, comment_id)
@@ -163,13 +159,13 @@ class BaseTestComment(unittest.TestCase):
                 return client.delete(url)
 
     def make_cross_account_request(
-        self, 
-        method: str, 
-        target_account_id: str, 
+        self,
+        method: str,
+        target_account_id: str,
         task_id: str,
-        auth_token: str, 
-        comment_id: str = None, 
-        data: dict = None
+        auth_token: str,
+        comment_id: str = None,
+        data: dict = None,
     ):
         if comment_id:
             url = self.get_comment_by_id_api_url(target_account_id, task_id, comment_id)

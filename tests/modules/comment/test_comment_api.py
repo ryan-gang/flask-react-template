@@ -263,4 +263,3 @@ class TestCommentApi(BaseTestComment):
             "DELETE", self.account.id, self.task.id, other_token, comment_id=comment.id
         )
         assert delete_response.status_code == 401
-
