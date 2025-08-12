@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useContext } from 'react';
+import React, { createContext, PropsWithChildren, useContext, useEffect } from 'react';
 
 import useAsync from 'frontend/contexts/async.hook';
 import { AccountService } from 'frontend/services';
@@ -50,6 +50,13 @@ export const AccountProvider: React.FC<PropsWithChildren> = ({ children }) => {
     result: accountDetails,
     asyncCallback: getAccountDetails,
   } = useAsync(getAccountDetailsFn);
+
+  useEffect(() => {
+    const accessToken = getAccessTokenFromStorage();
+    if (accessToken && !accountDetails) {
+      getAccountDetails();
+    }
+  }, [accountDetails, getAccountDetails]);
 
   return (
     <AccountContext.Provider
