@@ -4,6 +4,7 @@ import Button from 'frontend/components/button';
 import { Comment } from 'frontend/types';
 import { ButtonKind, ButtonType } from 'frontend/types/button';
 import { formatDateTime } from 'frontend/utils/date-util';
+import { useAuthor } from 'frontend/hooks/useAuthor';
 
 interface CommentItemProps {
   comment: Comment;
@@ -22,6 +23,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(comment.content);
+  const { author, isLoading: isAuthorLoading } = useAuthor(comment.account_id);
 
   const handleEdit = () => {
     if (onEdit) {
@@ -47,7 +49,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="font-medium text-body-color">
-            {comment.author_name || 'Anonymous'}
+            {isAuthorLoading ? 'Loading...' : (author?.displayName() || 'Anonymous')}
           </span>
           <span className="text-sm text-body-color/60">
             {formatDateTime(comment.created_at)}

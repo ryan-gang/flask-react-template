@@ -51,8 +51,8 @@ const CommentList: React.FC<CommentListProps> = ({
                 comment={comment}
                 onEdit={onEditComment}
                 onDelete={onDeleteComment}
-                canEdit={currentUserId === comment.author_id}
-                canDelete={currentUserId === comment.author_id}
+                canEdit={currentUserId === comment.account_id}
+                canDelete={currentUserId === comment.account_id}
               />
             ))
           )}
