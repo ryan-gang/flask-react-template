@@ -34,7 +34,7 @@ const TaskListPage: React.FC = () => {
     try {
       setIsLoading(true);
       setError(null);
-      
+
       const response = await taskService.getTasks(accountDetails.id);
       if (!response.error && response.data) {
         setTasks(response.data.tasks);

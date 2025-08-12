@@ -5,4 +5,11 @@ import ResetPasswordService from 'frontend/services/reset-password.service';
 import CommentService from 'frontend/services/comment.service';
 import TaskService from 'frontend/services/task.service';
 
-export { AccountService, APIService, AuthService, ResetPasswordService, CommentService, TaskService };
+export {
+  AccountService,
+  APIService,
+  AuthService,
+  ResetPasswordService,
+  CommentService,
+  TaskService,
+};

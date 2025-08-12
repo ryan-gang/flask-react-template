@@ -35,7 +35,7 @@ const CommentList: React.FC<CommentListProps> = ({
         <CommentForm onSubmit={onAddComment} isLoading={isLoading} />
       )}
 
-      <div 
+      <div
         className="border border-gray-200 rounded-lg p-2"
         style={{ maxHeight: '400px', overflowY: 'auto' }}
       >

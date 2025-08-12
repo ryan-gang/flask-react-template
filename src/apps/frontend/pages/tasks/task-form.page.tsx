@@ -16,7 +16,7 @@ const TaskFormPage: React.FC = () => {
 
   const [formData, setFormData] = useState<TaskFormData>({
     title: '',
-    description: ''
+    description: '',
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,7 +48,7 @@ const TaskFormPage: React.FC = () => {
         const task = response.data;
         setFormData({
           title: task.title,
-          description: task.description
+          description: task.description,
         });
       } else {
         const errorMessage = response.error?.message || 'Failed to load task';
@@ -96,13 +96,19 @@ const TaskFormPage: React.FC = () => {
 
       let response;
       if (isEditing && taskId) {
-        response = await taskService.updateTask(accountDetails.id, taskId, formData);
+        response = await taskService.updateTask(
+          accountDetails.id,
+          taskId,
+          formData,
+        );
       } else {
         response = await taskService.createTask(accountDetails.id, formData);
       }
 
       if (!response.error && response.data) {
-        const successMessage = isEditing ? 'Task updated successfully' : 'Task created successfully';
+        const successMessage = isEditing
+          ? 'Task updated successfully'
+          : 'Task created successfully';
         toast.success(successMessage);
         navigate(`/tasks/${response.data.id}`);
       } else {
@@ -121,10 +127,10 @@ const TaskFormPage: React.FC = () => {
   };
 
   const handleInputChange = (field: keyof TaskFormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: undefined }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
   };
 

@@ -10,7 +10,7 @@ export const formatDate = (dateString: string): string => {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   }).format(date);
 };
 
@@ -22,6 +22,6 @@ export const formatDateTime = (dateString: string): string => {
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
-    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   }).format(date);
 };

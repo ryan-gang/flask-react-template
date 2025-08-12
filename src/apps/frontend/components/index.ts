@@ -1,5 +1,8 @@
 import Button from 'frontend/components/button';
-import CommentList, { CommentForm, CommentItem } from 'frontend/components/comment';
+import CommentList, {
+  CommentForm,
+  CommentItem,
+} from 'frontend/components/comment';
 import FlexItem from 'frontend/components/flex/flex-item.component';
 import Flex from 'frontend/components/flex/flex.component';
 import FormControl from 'frontend/components/form-control';

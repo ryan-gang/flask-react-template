@@ -1,4 +1,9 @@
-import React, { createContext, PropsWithChildren, useContext, useEffect } from 'react';
+import React, {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+} from 'react';
 
 import useAsync from 'frontend/contexts/async.hook';
 import { AccountService } from 'frontend/services';
@@ -61,7 +66,9 @@ export const AccountProvider: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <AccountContext.Provider
       value={{
-        accountDetails: accountDetails ? new Account({ ...accountDetails }) : null, // creating an instance to access its methods
+        accountDetails: accountDetails
+          ? new Account({ ...accountDetails })
+          : null, // creating an instance to access its methods
         accountError,
         getAccountDetails,
         isAccountLoading,

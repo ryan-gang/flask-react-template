@@ -38,18 +38,22 @@ const CommentItem: React.FC<CommentItemProps> = ({
   };
 
   const handleDelete = () => {
-    if (onDelete && window.confirm('Are you sure you want to delete this comment?')) {
+    if (
+      onDelete &&
+      window.confirm('Are you sure you want to delete this comment?')
+    ) {
       onDelete(comment.id);
     }
   };
-
 
   return (
     <div className="border-b border-stroke py-4">
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="font-medium text-body-color">
-            {isAuthorLoading ? 'Loading...' : (author?.displayName() || 'Anonymous')}
+            {isAuthorLoading
+              ? 'Loading...'
+              : author?.displayName() || 'Anonymous'}
           </span>
           <span className="text-sm text-body-color/60">
             {formatDateTime(comment.created_at)}

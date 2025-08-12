@@ -13,7 +13,7 @@ const TaskDetailPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
   const navigate = useNavigate();
   const { accountDetails } = useAccountContext();
-  
+
   const [task, setTask] = useState<Task | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -42,13 +42,14 @@ const TaskDetailPage: React.FC = () => {
 
       const [taskResponse, commentsResponse] = await Promise.all([
         taskService.getTask(accountDetails.id, taskId),
-        commentService.getComments(accountDetails.id, taskId)
+        commentService.getComments(accountDetails.id, taskId),
       ]);
 
       if (!taskResponse.error && taskResponse.data) {
         setTask(taskResponse.data);
       } else {
-        const errorMessage = taskResponse.error?.message || 'Failed to load task';
+        const errorMessage =
+          taskResponse.error?.message || 'Failed to load task';
         setError(errorMessage);
         toast.error(errorMessage);
       }
@@ -72,12 +73,19 @@ const TaskDetailPage: React.FC = () => {
     try {
       setIsSubmittingComment(true);
 
-      const response = await commentService.createComment(accountDetails.id, taskId, {
-        content: data.content
-      });
+      const response = await commentService.createComment(
+        accountDetails.id,
+        taskId,
+        {
+          content: data.content,
+        },
+      );
 
       if (!response.error && response.data) {
-        setComments(prevComments => [...(prevComments || []), response.data!]);
+        setComments((prevComments) => [
+          ...(prevComments || []),
+          response.data!,
+        ]);
         toast.success('Comment added successfully');
       } else {
         toast.error(response.error?.message || 'Failed to add comment');
@@ -94,15 +102,20 @@ const TaskDetailPage: React.FC = () => {
     if (!taskId || !accountDetails?.id) return;
 
     try {
-      const response = await commentService.updateComment(accountDetails.id, taskId, commentId, {
-        content: newContent
-      });
+      const response = await commentService.updateComment(
+        accountDetails.id,
+        taskId,
+        commentId,
+        {
+          content: newContent,
+        },
+      );
 
       if (!response.error && response.data) {
-        setComments(prevComments =>
-          (prevComments || []).map(comment =>
-            comment.id === commentId ? response.data! : comment
-          )
+        setComments((prevComments) =>
+          (prevComments || []).map((comment) =>
+            comment.id === commentId ? response.data! : comment,
+          ),
         );
         toast.success('Comment updated successfully');
       } else {
@@ -118,11 +131,15 @@ const TaskDetailPage: React.FC = () => {
     if (!taskId || !accountDetails?.id) return;
 
     try {
-      const response = await commentService.deleteComment(accountDetails.id, taskId, commentId);
+      const response = await commentService.deleteComment(
+        accountDetails.id,
+        taskId,
+        commentId,
+      );
 
       if (!response.error) {
-        setComments(prevComments =>
-          (prevComments || []).filter(comment => comment.id !== commentId)
+        setComments((prevComments) =>
+          (prevComments || []).filter((comment) => comment.id !== commentId),
         );
         toast.success('Comment deleted successfully');
       } else {
@@ -153,7 +170,9 @@ const TaskDetailPage: React.FC = () => {
   if (error || !task) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-center text-red-600">{error || 'Task not found'}</div>
+        <div className="text-center text-red-600">
+          {error || 'Task not found'}
+        </div>
       </div>
     );
   }
