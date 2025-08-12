@@ -7,6 +7,7 @@ import { ButtonKind, ButtonType } from 'frontend/types/button';
 import { Task, Comment, CommentFormData } from 'frontend/types';
 import { TaskService, CommentService } from 'frontend/services';
 import { useAccountContext } from 'frontend/contexts';
+import { formatDate } from 'frontend/utils/date-util';
 
 const TaskDetailPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
@@ -179,7 +180,7 @@ const TaskDetailPage: React.FC = () => {
       <div className="bg-white border border-stroke rounded-lg p-6">
         <H2>{task.title}</H2>
         <p className="text-body-color/60 mt-2 mb-4">
-          Created on {new Date(task.created_at).toLocaleDateString()}
+          Created on {formatDate(task.created_at)}
         </p>
         <div className="whitespace-pre-wrap text-body-color">
           {task.description}

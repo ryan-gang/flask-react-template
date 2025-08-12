@@ -7,6 +7,7 @@ import { ButtonKind, ButtonType } from 'frontend/types/button';
 import { Task } from 'frontend/types';
 import { TaskService } from 'frontend/services';
 import { useAccountContext } from 'frontend/contexts';
+import { formatDate } from 'frontend/utils/date-util';
 
 const TaskListPage: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -118,7 +119,7 @@ const TaskListPage: React.FC = () => {
                   </p>
                 </div>
                 <div className="text-sm text-body-color/40">
-                  {new Date(task.created_at).toLocaleDateString()}
+                  {formatDate(task.created_at)}
                 </div>
               </div>
             </div>

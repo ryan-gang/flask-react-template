@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Button from 'frontend/components/button';
 import { Comment } from 'frontend/types';
 import { ButtonKind, ButtonType } from 'frontend/types/button';
+import { formatDateTime } from 'frontend/utils/date-util';
 
 interface CommentItemProps {
   comment: Comment;
@@ -40,15 +41,6 @@ const CommentItem: React.FC<CommentItemProps> = ({
     }
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
 
   return (
     <div className="border-b border-stroke py-4">
@@ -58,7 +50,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
             {comment.author_name || 'Anonymous'}
           </span>
           <span className="text-sm text-body-color/60">
-            {formatDate(comment.created_at)}
+            {formatDateTime(comment.created_at)}
           </span>
           {comment.updated_at !== comment.created_at && (
             <span className="text-sm text-body-color/40">(edited)</span>
