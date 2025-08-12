@@ -13,4 +13,7 @@ class TaskUtil:
             description=validated_task_data.description,
             id=str(validated_task_data.id),
             title=validated_task_data.title,
+            active=validated_task_data.active,
+            created_at=validated_task_data.created_at.isoformat() if validated_task_data.created_at else "",
+            updated_at=validated_task_data.updated_at.isoformat() if validated_task_data.updated_at else "",
         )

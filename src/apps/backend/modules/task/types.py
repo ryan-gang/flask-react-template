@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional
 
-from modules.application.common.types import PaginationParams, PaginationResult, SortParams
+from modules.application.common.types import PaginationParams, SortParams
 
 
 @dataclass(frozen=True)
@@ -11,6 +11,9 @@ class Task:
     account_id: str
     description: str
     title: str
+    active: bool
+    created_at: str
+    updated_at: str
 
 
 @dataclass(frozen=True)
