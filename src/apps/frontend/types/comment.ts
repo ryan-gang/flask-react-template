@@ -1,8 +1,7 @@
 export interface Comment {
   id: string;
   content: string;
-  author_id: string;
-  author_name?: string;
+  account_id: string;
   task_id: string;
   created_at: string;
   updated_at: string;
