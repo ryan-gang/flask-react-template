@@ -8,7 +8,7 @@ import { Logger } from 'frontend/utils/logger';
 import { getAccessTokenFromStorage } from 'frontend/utils/storage-util';
 
 type AccountContextType = {
-  accountDetails: Account;
+  accountDetails: Nullable<Account>;
   accountError: Nullable<AsyncError>;
   getAccountDetails: () => Promise<Nullable<Account>>;
   isAccountLoading: boolean;
@@ -61,7 +61,7 @@ export const AccountProvider: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <AccountContext.Provider
       value={{
-        accountDetails: new Account({ ...accountDetails }), // creating an instance to access its methods
+        accountDetails: accountDetails ? new Account({ ...accountDetails }) : null, // creating an instance to access its methods
         accountError,
         getAccountDetails,
         isAccountLoading,

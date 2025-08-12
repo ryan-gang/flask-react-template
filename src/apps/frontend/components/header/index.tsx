@@ -46,10 +46,12 @@ const Header: React.FC<HeaderProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
         </div>
         <div className="flex flex-1 items-center justify-end gap-3 2xsm:gap-7">
           {/* User Area */}
-          <UserProfileSnippet
-            account={accountDetails}
-            userMenuDropdownItems={userMenuDropdownItems}
-          />
+          {accountDetails && (
+            <UserProfileSnippet
+              account={accountDetails}
+              userMenuDropdownItems={userMenuDropdownItems}
+            />
+          )}
         </div>
       </div>
     </header>
