@@ -9,6 +9,20 @@ import {
 import { AccessToken, KeyboardKeys, PhoneNumber } from 'frontend/types/auth';
 import { ApiResponse, ApiError } from 'frontend/types/service-response';
 import { UserMenuDropdownItem } from 'frontend/types/user-menu-dropdown-item';
+import {
+  Comment,
+  CreateCommentRequest,
+  UpdateCommentRequest,
+  CommentListResponse,
+  CommentFormData,
+} from 'frontend/types/comment';
+import {
+  Task,
+  CreateTaskRequest,
+  UpdateTaskRequest,
+  TaskListResponse,
+  TaskFormData,
+} from 'frontend/types/task';
 
 export {
   AccessToken,
@@ -22,4 +36,14 @@ export {
   UseAsyncResponse,
   DatadogUser,
   UserMenuDropdownItem,
+  Comment,
+  CreateCommentRequest,
+  UpdateCommentRequest,
+  CommentListResponse,
+  CommentFormData,
+  Task,
+  CreateTaskRequest,
+  UpdateTaskRequest,
+  TaskListResponse,
+  TaskFormData,
 };
