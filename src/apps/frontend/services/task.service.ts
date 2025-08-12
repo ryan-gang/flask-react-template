@@ -20,12 +20,23 @@ export default class TaskService extends APIService {
     }
     
     const response = await this.apiClient.get(`/accounts/${accountId}/tasks`, {
-      params: { page, per_page: perPage },
+      params: { page, size: perPage },
       headers: {
         Authorization: `Bearer ${accessToken.token}`,
       },
     });
-    return new ApiResponse(response.data);
+    
+    // Transform PaginationResult to TaskListResponse
+    const paginationResult = response.data;
+    const taskListResponse = {
+      tasks: paginationResult.items || [],
+      total: paginationResult.total_count || 0,
+      page: paginationResult.pagination_params?.page || 1,
+      per_page: paginationResult.pagination_params?.size || 10,
+      total_pages: paginationResult.total_pages || 0,
+    };
+    
+    return new ApiResponse(taskListResponse);
   };
 
   createTask = async (
