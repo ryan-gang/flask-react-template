@@ -1,11 +1,11 @@
 from typing import Any
 
-from bson.objectid import ObjectId
-
 from modules.comment.errors import CommentTaskNotFoundError
 from modules.comment.internal.store.comment_model import CommentModel
 from modules.comment.types import Comment
-from modules.task.internal.store.task_repository import TaskRepository
+from modules.task.errors import TaskNotFoundError
+from modules.task.task_service import TaskService
+from modules.task.types import GetTaskParams
 
 
 class CommentUtil:
@@ -21,10 +21,10 @@ class CommentUtil:
 
     @staticmethod
     def validate_task_exists(account_id: str, task_id: str) -> None:
-        task_bson = TaskRepository.collection().find_one(
-            {"_id": ObjectId(task_id), "account_id": account_id, "active": True}
-        )
-        if task_bson is None:
+        try:
+            task_params = GetTaskParams(account_id=account_id, task_id=task_id)
+            TaskService.get_task(params=task_params)
+        except TaskNotFoundError:
             raise CommentTaskNotFoundError(task_id=task_id)
 
         return
