@@ -1,5 +1,5 @@
-from dataclasses import dataclass
-from datetime import datetime
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Optional
 
 from bson import ObjectId
@@ -13,9 +13,9 @@ class CommentModel(BaseModel):
     content: str
     task_id: str
     active: bool = True
-    created_at: Optional[datetime] = datetime.now()
+    created_at: Optional[datetime] = field(default_factory=lambda: datetime.now(timezone.utc))
     id: Optional[ObjectId | str] = None
-    updated_at: Optional[datetime] = datetime.now()
+    updated_at: Optional[datetime] = field(default_factory=lambda: datetime.now(timezone.utc))
 
     @classmethod
     def from_bson(cls, bson_data: dict) -> "CommentModel":

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from bson.objectid import ObjectId
 from pymongo import ReturnDocument
@@ -41,7 +41,7 @@ class CommentWriter:
                 "task_id": params.task_id,
                 "active": True,
             },
-            {"$set": {"content": params.content, "updated_at": datetime.now()}},
+            {"$set": {"content": params.content, "updated_at": datetime.now(timezone.utc)}},
             return_document=ReturnDocument.AFTER,
         )
 
@@ -54,7 +54,7 @@ class CommentWriter:
     def delete_comment(*, params: DeleteCommentParams) -> CommentDeletionResult:
         CommentUtil.validate_task_exists(params.account_id, params.task_id)
 
-        deletion_time = datetime.now()
+        deletion_time = datetime.now(timezone.utc)
         updated_comment_bson = CommentRepository.collection().find_one_and_update(
             {
                 "_id": ObjectId(params.comment_id),

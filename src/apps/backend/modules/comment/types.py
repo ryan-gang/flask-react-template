@@ -11,6 +11,8 @@ class Comment:
     account_id: str
     task_id: str
     content: str
+    created_at: str
+    updated_at: str
 
 
 @dataclass(frozen=True)
