@@ -14,7 +14,7 @@ interface ButtonProps {
 
 const ButtonClasses: Record<ButtonKind, string> = {
   [ButtonKind.PRIMARY]:
-    'flex w-full items-center justify-center rounded-lg border bg-primary p-4 font-medium text-white transition active:bg-primary/80',
+    'flex items-center justify-center rounded-lg border bg-primary px-6 py-3 font-medium text-white transition active:bg-primary/80',
   [ButtonKind.SECONDARY]: 'inset-y-0 flex items-center',
   [ButtonKind.TERTIARY]:
     'bg-transparent text-center text-lg text-primary active:bg-transparent',
